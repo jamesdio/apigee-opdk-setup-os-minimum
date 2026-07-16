@@ -10,6 +10,9 @@ apigee_max_map_count: 131072
 qpid_client: ftp://fr2.rpmfind.net/linux/epel/7/x86_64/q/qpid-cpp-client-1.35.0-3.el7.x86_64.rpm
 qpid_server: ftp://fr2.rpmfind.net/linux/epel/7/x86_64/q/qpid-cpp-server-1.35.0-3.el7.x86_64.rpm
 
+# libselinux-python was renamed to python3-libselinux starting with EL8 (Rocky/RHEL/Alma 8+)
+selinux_python_package: "{{ 'python3-libselinux' if ansible_distribution_major_version is version_compare('8', '>=') else 'libselinux-python' }}"
+
 yum_packages:
 - bind-utils
 - chkconfig
@@ -20,7 +23,6 @@ yum_packages:
 - unzip
 - rsync
 - which
-- libselinux-python
 - nss
 - openssh-clients
 - openssh-server
